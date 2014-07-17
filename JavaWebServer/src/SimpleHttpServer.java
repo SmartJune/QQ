@@ -1,24 +1,7 @@
 import java.io.*;
 import java.net.*;
 import java.util.StringTokenizer;
-/**
- * 一个简单的用 Java Socket 编写的 HTTP 服务器应用, 演示了请求和应答的协议通信内容以及
- * 给客户端返回 HTML 文本和二进制数据文件(一个图片), 同时展示了 404, 200 等状态码.
- * 首先运行这个程序,然后打开Web浏览器,键入http://localhost,则这个程序能够显示出浏览器发送了那些信息
- * 并且向浏览器返回一个网页和一副图片, 并测试同浏览器对话.
- * 当浏览器看到 HTML 中带有图片地址时, 则会发出第二次连接来请求图片等资源.
- * 这个例子可以帮您理解 Java 的 HTTP 服务器软件是基于 J2SE 的 Socket 等软件编写的概念, 并熟悉
- * HTTP协议.
- * 相反的用 Telnet 连接到已有的服务器则可以帮忙理解浏览器的运行过程和服务器端的返回内容.
- *
- * <pre>
- *       当用户在Web浏览器地址栏中输入一个带有http://前缀的URL并按下Enter后,或者在Web页面中某个以
- *       http://开头的超链接上单击鼠标,HTTP事务处理的第一个阶段–建立连接阶段就开始了.HTTP的默认端口是80.
- *    随着连接的建立,HTTP就进入了客户向服务器发送请求的阶段.客户向服务器发送的请求是一个有特定格式的ASCII消息,其语法规则为:
- * < Method > < URL > < HTTP Version > <\n>
- * { <Header>:<Value> <\n>}*
- * <\n>
- * { Entity Body }
+/*
  *    请求消息的顶端是请求行,用于指定方法,URL和HTTP协议的版本,请求行的最后是回车换行.方法有GET,POST,HEAD,PUT,DELETE等.
  * 在请求行之后是若干个报头(Header)行.每个报头行都是由一个报头和一个取值构成的二元对,报头和取值之间以":"分隔;报头行的
  * 最后是回车换行.常见的报头有Accept(指定MIME媒体类型),Accept_Charset(响应消息的编码方式),Accept_Encoding(响应消
@@ -32,37 +15,10 @@ import java.util.StringTokenizer;
  * { Entity Body }
  *    应答消息的第一行为状态行,其中包括了HTTP版本号,状态码和对状态码进行简短解释的消息;状态行的最后是回车换行.
  *    状态码由3位数字组成,有5类:
- * 参看:HTTP应答码及其意义
- *
- * 1XX 保留
- * 2XX 表示成功
- * 3XX 表示URL已经被移走
- * 4XX 表示客户错误
- * 5XX 表示服务器错误
- * 例如:415,表示不支持改媒体类型;503,表示服务器不能访问.最常见的是200,表示成功.常见的报头有:
- * Last_Modified(最后修改时间),Content_Type(消息内容的MIME类型),Content_Length(内容长度)等.
- *    在报头行之后也是一个回车换行,用以表示应答消息的报头部分的结束,以及应答消息实体的开始.
- *    下面是一个应答消息的例子:
- * HTTP/1.0 200 OK
- * Date: Moday,07-Apr-97 21:13:02 GMT
- * Server:NCSA/1.1
- * MIME_Version:1.0
- * Content_Type:text/html
- * Last_Modified:Thu Dec 5 09:28:01 1996
- * Coentent_Length:3107
- *
- * <HTML><HEAD><TITLE></HTML>
- *
  * 在用Java语言实现HTTP服务器时,首先启动一个java.net.ServerSocket在服务器的端口上监听连接.向客户返回文本时,
  * 可以用 PrintWriter,但是如果返回二进制数据,则必须使用OutputStream.write(byte[])方法,
  * 返回的应答消息字符串可以使用 String.getBytes()方法转换为字节数组返回,或者使用PrintStream的print()方法写入文本,
  * 用 write(byte[])方法写入二进制数据.
- *
- * </pre>
- * @author 刘长炯
- * @version 1.0 2007-07-24 Sunday
- * @version 1.1 2008-05-18 Sunday
- * 支持浏览器发出的POST信息打印，修正POST方式无法完成响应造成阻赛的BUG
  */
 public class SimpleHttpServer implements Runnable {
     /**
@@ -70,7 +26,7 @@ public class SimpleHttpServer implements Runnable {
      */
     ServerSocket serverSocket;//服务器Socket
     /**
-     * 服务器监听端口, 默认为 80.
+     * 服务器监听端口.
      */
     public static int PORT=65534;//标准HTTP端口
     /**
