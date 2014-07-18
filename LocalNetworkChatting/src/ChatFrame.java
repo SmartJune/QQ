@@ -40,7 +40,7 @@ public class ChatFrame extends JFrame{
 	}
 	public void connectToServer(){
 		try {
-			socket = new Socket("192.168.1.103",8887);
+			socket = new Socket("192.168.1.106",8887);       
 			dataOut = new DataOutputStream(socket.getOutputStream());
 			
 			System.out.println("connect to server successfully.");

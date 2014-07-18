@@ -7,23 +7,38 @@ import java.net.Socket;
 public class ChatServer {
 	public static void main(String[] args){
 		boolean started = false;
+		ServerSocket ss = null;
+		Socket s = null;
+		DataInputStream dataIn = null;
+		
 		try {
-			ServerSocket ss = new ServerSocket(8887);
+			ss = new ServerSocket(8887);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		try {
 			started = true;
 			while(started){
 				boolean connected = false;
-				Socket s = ss.accept();
+				s = ss.accept();
 				System.out.println("client connected success");
 				connected = true;
-				DataInputStream dataIn = new DataInputStream(s.getInputStream());
+				dataIn = new DataInputStream(s.getInputStream());
 				while(connected){
 					String string = dataIn.readUTF();
 					System.out.println(string);
 				}
 				dataIn.close();
 			}
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
+			try {
+				dataIn.close();
+				s.close();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
 		}
 		
