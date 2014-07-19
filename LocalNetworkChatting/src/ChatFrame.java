@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
@@ -16,9 +17,11 @@ import javax.swing.JFrame;
 
 public class ChatFrame extends JFrame{
 	DataOutputStream dataOut = null;
+	DataInputStream dataIn = null;
 	Socket socket = null;
 	TextField textField = new TextField();
 	TextArea textArea = new TextArea();
+	private boolean connected = false;
 	
 	public ChatFrame(){
 		super("聊天");
@@ -37,13 +40,16 @@ public class ChatFrame extends JFrame{
 		textField.addActionListener(new TextFieldListener());
 		setVisible(true);
 		connectToServer();
+		
+		new Thread(new ReceiveThread()).start();
 	}
 	public void connectToServer(){
 		try {
 			socket = new Socket("192.168.1.106",8887);       
 			dataOut = new DataOutputStream(socket.getOutputStream());
-			
+			dataIn = new DataInputStream(socket.getInputStream());
 			System.out.println("connect to server successfully.");
+			connected = true;
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -66,7 +72,7 @@ public class ChatFrame extends JFrame{
 		public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 			String string = textField.getText().trim();
-			textArea.setText(string);
+		//	textArea.setText(string);
 			textField.setText("");
 			
 			try {
@@ -78,5 +84,24 @@ public class ChatFrame extends JFrame{
 				e1.printStackTrace();
 			}
 		}	
+	}
+
+	private class ReceiveThread implements Runnable{
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			while(connected){
+				try {
+					String str = dataIn.readUTF();
+					textArea.setText(textArea.getText() + str + '\n');
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+		}
+		
 	}
 }
