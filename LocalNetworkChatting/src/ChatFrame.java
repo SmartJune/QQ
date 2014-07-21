@@ -37,6 +37,7 @@ public class ChatFrame extends JFrame{
 			}
 		});
 //		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		textArea.setEditable(false);
 		textField.addActionListener(new TextFieldListener());
 		setVisible(true);
 		connectToServer();
@@ -45,7 +46,7 @@ public class ChatFrame extends JFrame{
 	}
 	public void connectToServer(){
 		try {
-			socket = new Socket("192.168.1.106",8887);       
+			socket = new Socket("192.168.1.100",8887);       
 			dataOut = new DataOutputStream(socket.getOutputStream());
 			dataIn = new DataInputStream(socket.getInputStream());
 			System.out.println("connect to server successfully.");
