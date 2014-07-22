@@ -1,8 +1,11 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
 
-public class ClientLogin extends JFrame{
+public class ClientLogin extends JFrame implements ActionListener{
 	
 	//north
 	JLabel northLabel;
@@ -35,6 +38,7 @@ public class ClientLogin extends JFrame{
 		centerPanel.add(hide);
 		//south
 		login = new JButton("login");
+		login.addActionListener(this);	//login listener
 		cancel = new JButton("cancel");
 		signIn = new JButton("sign in");
 		southPanel = new JPanel();
@@ -54,6 +58,25 @@ public class ClientLogin extends JFrame{
 	
 	public static void main(String[] args){
 		ClientLogin clientLogin = new ClientLogin();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		if (arg0.getSource() == login){
+			LoginCheck lc = new LoginCheck();
+			User u = new User();
+			u.setUserId(numb.getText().trim());
+			u.setPassword(new String(pswd.getPassword()));
+			
+			if(lc.checkUser(u)){
+				new OnlineList();
+				this.dispose();	
+			}
+			else{
+				JOptionPane.showMessageDialog(this,"name or password error!or server doesn't response truely");
+			}
+		}
 	}
 	
 }

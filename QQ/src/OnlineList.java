@@ -92,8 +92,8 @@ public class OnlineList extends JFrame implements ActionListener,MouseListener{
 		if(arg0.getClickCount()==2){
 			//get his id
 			String friendId = ((JLabel)arg0.getSource()).getText();
-			System.out.println(friendId);
-		}
+			new ChatFrame(friendId);
+			}
 	}
 
 	@Override
