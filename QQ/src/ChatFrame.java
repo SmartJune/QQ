@@ -9,6 +9,8 @@ public class ChatFrame extends JFrame implements ActionListener,Runnable{
 	JTextField jtf;
 	JButton jb;
 	JPanel jp;
+	String friend;
+	String owner;
 	public ChatFrame(String friend,String owner){
 		jta = new JTextArea();
 		jta.setEditable(false);
@@ -18,6 +20,9 @@ public class ChatFrame extends JFrame implements ActionListener,Runnable{
 		jp = new JPanel();
 		jp.add(jtf);
 		jp.add(jb);
+		
+		this.friend = friend;
+		this.owner = owner;
 		
 		this.add(jta,"Center");
 		this.add(jp,"South");
@@ -32,6 +37,8 @@ public class ChatFrame extends JFrame implements ActionListener,Runnable{
 		if(e.getSource() == jb){
 			Message mess = new Message();
 			mess.setContent(jtf.getText().trim());
+			mess.setFrom(owner);
+			mess.setTo(friend);
 			try {
 				ObjectOutputStream oos = new ObjectOutputStream(ConnectToServer.s.getOutputStream());
 				oos.writeObject(mess);

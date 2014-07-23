@@ -20,7 +20,6 @@ public class ConnectToServer {
 				if(ms.getMessageType().equals("1")){
 					b = true;
 				}
-				
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
