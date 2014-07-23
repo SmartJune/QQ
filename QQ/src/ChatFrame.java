@@ -37,8 +37,8 @@ public class ChatFrame extends JFrame implements ActionListener,Runnable{
 		if(e.getSource() == jb){
 			Message mess = new Message();
 			mess.setContent(jtf.getText().trim());
-			mess.setFrom(owner);
-			mess.setTo(friend);
+			mess.setFrom(friend);
+			mess.setTo(owner);
 			try {
 				ObjectOutputStream oos = new ObjectOutputStream(ConnectToServer.s.getOutputStream());
 				oos.writeObject(mess);
