@@ -7,6 +7,8 @@ public class QqServer {
 	Message m = new Message();
 	ObjectInputStream ois;
 	ObjectOutputStream oos;
+	User u;
+	
 	public QqServer() {
 		
 		try {
@@ -18,7 +20,7 @@ public class QqServer {
 				oos = new ObjectOutputStream(s.getOutputStream());
 				ois = new ObjectInputStream(s.getInputStream());
 				try {
-					User u = (User)ois.readObject();
+					u = (User)ois.readObject();
 					
 					System.out.println("ID:"+u.getUserId()+"   "+"Password:"+u.getPassword());
 					
@@ -35,6 +37,13 @@ public class QqServer {
 						oos.writeObject(m);
 						s.close();
 					}		
+					
+					if(m.getMessageType().equals("1")){
+						ConnectToClient cts = new ConnectToClient(s); 
+						Thread t = new Thread(cts);
+						t.start();
+					}
+					
 				} catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

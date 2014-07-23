@@ -3,12 +3,12 @@ import java.io.*;
 import java.net.*;
 
 public class ConnectToServer {
-	
+	public static Socket s;
 	public boolean sendLoginInfoToServer(Object o){
 		
 		boolean b = false;
 		try {
-			Socket s = new Socket("192.168.1.100",9999);
+			s = new Socket("192.168.1.100",9999);
 			ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
 			oos.writeObject(o);
 			
