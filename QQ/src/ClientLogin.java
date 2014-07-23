@@ -70,7 +70,7 @@ public class ClientLogin extends JFrame implements ActionListener{
 			u.setPassword(new String(pswd.getPassword()));
 			
 			if(lc.checkUser(u)){
-				new OnlineList();
+				new OnlineList(u.getUserId());
 				this.dispose();	
 			}
 			else{

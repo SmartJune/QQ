@@ -6,7 +6,7 @@ public class ChatFrame extends JFrame{
 	JTextField jtf;
 	JButton jb;
 	JPanel jp;
-	public ChatFrame(String friend){
+	public ChatFrame(String friend,String owner){
 		jta = new JTextArea();
 		jtf = new JTextField(30);
 		jb = new JButton("send");
@@ -16,13 +16,9 @@ public class ChatFrame extends JFrame{
 		
 		this.add(jta,"Center");
 		this.add(jp,"South");
-		this.setTitle("chatting with "+friend);
+		this.setTitle(owner +" is now chatting with "+friend);
 		this.setSize(500,400);
 		this.setVisible(true);
 		
-	}
-	
-	public static void main(String[] args){
-		new ChatFrame("june");
 	}
 }

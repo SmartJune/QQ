@@ -15,12 +15,10 @@ public class OnlineList extends JFrame implements ActionListener,MouseListener{
 	JScrollPane jsp2;
 	
 	CardLayout card;
+
+	String userId;
 	
-	public static void main(String[] args){
-		new OnlineList();
-	}
-	
-	public OnlineList(){
+	public OnlineList(String userID){
 		//friend list
 		mainPanel = new JPanel(new BorderLayout());	
 		int userNumber = 70;
@@ -70,6 +68,8 @@ public class OnlineList extends JFrame implements ActionListener,MouseListener{
 		this.setLayout(card);
 		this.add(mainPanel,"1");
 		this.add(mainPanel2,"2");
+		this.userId = userID;
+		this.setTitle(userID);
 		this.setSize(300,600);
 		this.setVisible(true);
 		
@@ -92,7 +92,8 @@ public class OnlineList extends JFrame implements ActionListener,MouseListener{
 		if(arg0.getClickCount()==2){
 			//get his id
 			String friendId = ((JLabel)arg0.getSource()).getText();
-			new ChatFrame(friendId);
+			String ownerId ;
+			new ChatFrame(friendId,userId);
 			}
 	}
 

@@ -2,18 +2,19 @@ import java.net.*;
 import java.io.*;
 
 public class QqServer {
-
+	ServerSocket ss;
+	Socket s;
 	Message m = new Message();
 	ObjectInputStream ois;
 	ObjectOutputStream oos;
 	public QqServer() {
 		
 		try {
-			ServerSocket ss = new ServerSocket(9999);
+			ss = new ServerSocket(9999);
 			System.out.println("server start----");
 			
 			while(true){
-				Socket s = ss.accept(); //waiting to connect
+				s = ss.accept(); //waiting to connect
 				oos = new ObjectOutputStream(s.getOutputStream());
 				ois = new ObjectInputStream(s.getInputStream());
 				try {
@@ -21,7 +22,11 @@ public class QqServer {
 					
 					System.out.println("ID:"+u.getUserId()+"   "+"Password:"+u.getPassword());
 					
-					if(u.getUserId().equals("a")&& u.getPassword().equals("b")){
+					if(u.getUserId().equals("1")&& u.getPassword().equals("abcd")){
+						m.setMessageType("1");
+						System.out.println("没错啊就是1");
+						oos.writeObject(m);
+					}else if(u.getUserId().equals("2")&& u.getPassword().equals("asdf")){
 						m.setMessageType("1");
 						System.out.println("没错啊就是1");
 						oos.writeObject(m);
@@ -45,5 +50,14 @@ public class QqServer {
 		
 		
 	}
-	
+
+	public void closeServer(){
+		try {
+			ss.close();
+			System.out.println("server closed");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

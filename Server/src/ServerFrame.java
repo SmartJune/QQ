@@ -14,6 +14,7 @@ public class ServerFrame extends JFrame implements ActionListener{
 		jb1 = new JButton("start the server");
 		jb1.addActionListener(this);
 		jb2 = new JButton("close the server");
+		jb2.addActionListener(this);
 		jp.add(jb1);
 		jp.add(jb2);
 		
@@ -33,6 +34,8 @@ public class ServerFrame extends JFrame implements ActionListener{
 		// TODO Auto-generated method stub
 		if(arg0.getSource() == jb1){
 			new QqServer();
+		}else if(arg0.getSource() == jb2){
+			new QqServer().closeServer();
 		}
 	}
 	
