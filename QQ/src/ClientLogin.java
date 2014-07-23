@@ -21,7 +21,7 @@ public class ClientLogin extends JFrame implements ActionListener{
 	
 	public ClientLogin(){
 		//north
-		northLabel = new JLabel("\n"+"Welcome to use QQ for linux"+"\n",JLabel.CENTER);
+		northLabel = new JLabel("Thanks to K,Jovn and friends from Bug Clan",JLabel.CENTER);
 		//center
 		centerPanel = new JPanel(new GridLayout(3,2));
 		number = new JLabel("QQ number",JLabel.CENTER);
@@ -40,7 +40,9 @@ public class ClientLogin extends JFrame implements ActionListener{
 		login = new JButton("login");
 		login.addActionListener(this);	//login listener
 		cancel = new JButton("cancel");
+		cancel.addActionListener(this);
 		signIn = new JButton("sign in");
+		signIn.addActionListener(this);
 		southPanel = new JPanel();
 		southPanel.add(login);
 		southPanel.add(cancel);
@@ -74,8 +76,14 @@ public class ClientLogin extends JFrame implements ActionListener{
 				this.dispose();	
 			}
 			else{
-				JOptionPane.showMessageDialog(this,"name or password error!or server doesn't response truely");
+				JOptionPane.showMessageDialog(this,"Name or password error!or server doesn't response truely");
 			}
+		}
+		else if (arg0.getSource() == cancel){
+			this.dispose();
+		}
+		else if (arg0.getSource() == signIn){
+			JOptionPane.showMessageDialog(this,"Function has not available now");			
 		}
 	}
 	

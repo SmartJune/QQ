@@ -1,5 +1,6 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.*;
 
@@ -8,7 +9,8 @@ public class ServerFrame extends JFrame implements ActionListener{
 	
 	JPanel jp;
 	JButton jb1,jb2;
-	
+	Thread t;
+	QqServer q;
 	public ServerFrame(){
 		jp = new JPanel();
 		jb1 = new JButton("start the server");
@@ -33,9 +35,18 @@ public class ServerFrame extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 		if(arg0.getSource() == jb1){
-			new QqServer();
+			q = new QqServer();
+			t = new Thread(q);
+			t.start();
 		}else if(arg0.getSource() == jb2){
-			new QqServer().closeServer();
+			try {
+				q.connected = false;
+				q.s.close();
+				q.ss.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	

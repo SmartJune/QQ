@@ -1,21 +1,22 @@
 import java.net.*;
 import java.io.*;
 
-public class QqServer {
+public class QqServer implements Runnable{
 	ServerSocket ss;
 	Socket s;
 	Message m = new Message();
 	ObjectInputStream ois;
 	ObjectOutputStream oos;
 	User u;
+	boolean connected = true;
 	
-	public QqServer() {
+	public void startServer() {
 		
 		try {
 			ss = new ServerSocket(9999);
 			System.out.println("server start----");
 			
-			while(true){
+			while(connected){
 				s = ss.accept(); //waiting to connect
 				oos = new ObjectOutputStream(s.getOutputStream());
 				ois = new ObjectInputStream(s.getInputStream());
@@ -63,12 +64,15 @@ public class QqServer {
 	}
 
 	public void closeServer(){
-		try {
-			ss.close();
-			System.out.println("server closed");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		connected = false;
+//	s.close();
+//	ss.close();
+		System.out.println("server closed");
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		startServer();
 	}
 }
