@@ -18,6 +18,11 @@ public class ConnectToClient implements Runnable{
 				try {
 					Message mess = (Message) ois.readObject();
 					System.out.println(mess.getContent());
+					
+					ConnectToClient ctc = SocketThreadManager.getClientSocketThread(mess.getFrom());
+					ObjectOutputStream oos = new ObjectOutputStream(ctc.s.getOutputStream());
+					oos.writeObject(mess);
+					
 				} catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

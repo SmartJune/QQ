@@ -39,8 +39,10 @@ public class QqServer {
 					}		
 					
 					if(m.getMessageType().equals("1")){
-						ConnectToClient cts = new ConnectToClient(s); 
-						Thread t = new Thread(cts);
+						ConnectToClient ctc = new ConnectToClient(s);
+						SocketThreadManager.addClientSocketThread(u.getUserId(),ctc);;
+						
+						Thread t = new Thread(ctc);
 						t.start();
 					}
 					
