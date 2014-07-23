@@ -25,7 +25,7 @@ public class OnlineList extends JFrame implements ActionListener,MouseListener{
 		listPanel = new JPanel(new GridLayout(userNumber,1,4,4));	
 		JLabel[] jlbs = new JLabel[userNumber];
 		for(int i = 0;i<jlbs.length;i++){
-			jlbs[i] = new JLabel(i+1+"    "+"0.0",JLabel.LEFT);
+			jlbs[i] = new JLabel(i+1+"",JLabel.LEFT);
 			jlbs[i].addMouseListener(this);
 			listPanel.add(jlbs[i]);
 		}
@@ -48,7 +48,7 @@ public class OnlineList extends JFrame implements ActionListener,MouseListener{
 		listPanel2 = new JPanel(new GridLayout(strangerNumber,1,4,4));	
 		JLabel[] jlbs2 = new JLabel[strangerNumber];
 		for(int i = 0;i<jlbs2.length;i++){
-			jlbs2[i] = new JLabel(i+1+"    "+"-.-",JLabel.LEFT);
+			jlbs2[i] = new JLabel(i+1+"",JLabel.LEFT);
 			jlbs2[i].addMouseListener(this);
 			listPanel2.add(jlbs2[i]);
 		}

@@ -4,7 +4,7 @@ import java.io.*;
 import javax.swing.*;
 
 
-public class ChatFrame extends JFrame implements ActionListener {
+public class ChatFrame extends JFrame implements ActionListener,Runnable{
 	JTextArea jta;
 	JTextField jtf;
 	JButton jb;
@@ -38,6 +38,27 @@ public class ChatFrame extends JFrame implements ActionListener {
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
+			}
+		}
+	}
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		while(true){
+			try {
+				ObjectInputStream ois = new ObjectInputStream(ConnectToServer.s.getInputStream());
+				try {
+					Message mess = (Message)ois.readObject();
+					String info = mess.getContent();
+					this.jta.append(info);
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 	}
