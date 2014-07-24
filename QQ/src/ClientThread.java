@@ -3,6 +3,8 @@ import java.net.*;
 
 public class ClientThread extends Thread{
 	
+	//class of getting message package
+	
 	private Socket s;
 	
 	public ClientThread(Socket s){
@@ -22,8 +24,20 @@ public class ClientThread extends Thread{
 				try {
 					Message mess = (Message)ois.readObject();
 					System.out.println(mess.getFrom()+"to"+mess.getTo()+"说："+mess.getContent());
-					ChatFrame cf = ChatFrameManager.getChatFrame(mess.getFrom()+" "+mess.getTo());
-					cf.showMessage(mess);
+					if(mess.getMessageType().equals(MessageType.chatMessage)){
+						ChatFrame cf = ChatFrameManager.getChatFrame(mess.getFrom()+" "+mess.getTo());
+						cf.showMessage(mess);
+					}else if(mess.getMessageType().equals(MessageType.returnList)){
+						//try to return a string with many people online
+						String list = mess.getContent();
+						String guys[] = list.split(" ");
+						
+						OnlineList ol = OnlineListManager.getOnlineList(mess.getTo());
+////////////////////change the list at here
+						
+					}
+					
+					
 				} catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

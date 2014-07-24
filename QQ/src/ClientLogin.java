@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 import javax.swing.*;
 
@@ -72,6 +74,21 @@ public class ClientLogin extends JFrame implements ActionListener{
 			u.setPassword(new String(pswd.getPassword()));
 			
 			if(lc.checkUser(u)){
+				//online friend list request
+				try {
+					ObjectOutputStream oos =  new ObjectOutputStream(ClientThreadManager
+							.getClientThread(u.getUserId()).getSocket().getOutputStream());
+					
+					Message mess = new Message();
+					mess.setMessageType(MessageType.getOnlineList);
+					mess.setFrom(u.getUserId());
+					mess.setTo(u.getPassword());
+					oos.writeObject(mess);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 				new OnlineList(u.getUserId());
 				this.dispose();	
 			}
