@@ -8,30 +8,35 @@ public class QqServer implements Runnable{
 	ObjectInputStream ois;
 	ObjectOutputStream oos;
 	User u;
-	boolean connected = true;
+	boolean started = false;
 	
 	public void startServer() {
 		
 		try {
 			ss = new ServerSocket(9999);
+			started = true;
 			System.out.println("server start----");
 			
-			while(connected){
+			while(started){
 				s = ss.accept(); //waiting to connect
 				oos = new ObjectOutputStream(s.getOutputStream());
 				ois = new ObjectInputStream(s.getInputStream());
 				try {
 					u = (User)ois.readObject();
 					
-					System.out.println("ID:"+u.getUserId()+"   "+"Password:"+u.getPassword());
+			//		System.out.println("ID:"+u.getUserId()+"   "+"Password:"+u.getPassword());
 					
-					if(u.getUserId().equals("1")&& u.getPassword().equals("abcd")){
+					if(u.getUserId().equals("1")&& u.getPassword().equals("a")){
 						m.setMessageType("1");
-						System.out.println("没错啊就是1");
+				//		System.out.println("没错啊就是1");
 						oos.writeObject(m);
-					}else if(u.getUserId().equals("2")&& u.getPassword().equals("asdf")){
+					}else if(u.getUserId().equals("2")&& u.getPassword().equals("b")){
 						m.setMessageType("1");
-						System.out.println("没错啊就是1");
+				//		System.out.println("没错啊就是1");
+						oos.writeObject(m);
+					}else if(u.getUserId().equals("3")&& u.getPassword().equals("c")){
+						m.setMessageType("1");
+				//		System.out.println("没错啊就是1");
 						oos.writeObject(m);
 					}else{
 						m.setMessageType("2");
@@ -64,7 +69,7 @@ public class QqServer implements Runnable{
 	}
 
 	public void closeServer(){
-		connected = false;
+		started = false;
 //	s.close();
 //	ss.close();
 		System.out.println("server closed");

@@ -21,7 +21,7 @@ public class OnlineList extends JFrame implements ActionListener,MouseListener{
 	public OnlineList(String userID){
 		//friend list
 		mainPanel = new JPanel(new BorderLayout());	
-		int userNumber = 70;
+		int userNumber = 30;
 		listPanel = new JPanel(new GridLayout(userNumber,1,4,4));	
 		JLabel[] jlbs = new JLabel[userNumber];
 		for(int i = 0;i<jlbs.length;i++){
@@ -48,7 +48,7 @@ public class OnlineList extends JFrame implements ActionListener,MouseListener{
 		listPanel2 = new JPanel(new GridLayout(strangerNumber,1,4,4));	
 		JLabel[] jlbs2 = new JLabel[strangerNumber];
 		for(int i = 0;i<jlbs2.length;i++){
-			jlbs2[i] = new JLabel(i+1+"",JLabel.LEFT);
+			jlbs2[i] = new JLabel(userNumber+i+1+"",JLabel.LEFT);
 			jlbs2[i].addMouseListener(this);
 			listPanel2.add(jlbs2[i]);
 		}
@@ -94,8 +94,8 @@ public class OnlineList extends JFrame implements ActionListener,MouseListener{
 			String friendId = ((JLabel)arg0.getSource()).getText();
 			String ownerId;
 			ChatFrame cf = new ChatFrame(friendId,userId);
-			Thread t = new Thread(cf);
-			t.start();
+	/*		Thread t = new Thread(cf);
+			t.start();  */
 			}
 	}
 

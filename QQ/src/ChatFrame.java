@@ -4,13 +4,14 @@ import java.io.*;
 import javax.swing.*;
 
 
-public class ChatFrame extends JFrame implements ActionListener,Runnable{
+public class ChatFrame extends JFrame implements ActionListener{
 	JTextArea jta;
 	JTextField jtf;
 	JButton jb;
 	JPanel jp;
 	String friend;
 	String owner;
+	Message ownMess;
 	public ChatFrame(String friend,String owner){
 		jta = new JTextArea();
 		jta.setEditable(false);
@@ -35,28 +36,31 @@ public class ChatFrame extends JFrame implements ActionListener,Runnable{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource() == jb){
-			Message mess = new Message();
-			mess.setContent(jtf.getText().trim());
-			mess.setFrom(friend);
-			mess.setTo(owner);
+			ownMess = new Message();
+			ownMess.setContent(jtf.getText().trim());
+			ownMess.setFrom(owner);
+			ownMess.setTo(friend);
 			try {
-				ObjectOutputStream oos = new ObjectOutputStream(ConnectToServer.s.getOutputStream());
-				oos.writeObject(mess);
+				ObjectOutputStream oos = new ObjectOutputStream(ClientThreadManager.getClientThread(owner).getSocket().getOutputStream());
+				oos.writeObject(ownMess);
+				
+				String infoma = ownMess.getFrom()+":"+ownMess.getContent();
+				this.jta.append(infoma);
+				
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}
 	}
-	@Override
-	public void run() {
+/*	public void run() {
 		// TODO Auto-generated method stub
 		while(true){
 			try {
 				ObjectInputStream ois = new ObjectInputStream(ConnectToServer.s.getInputStream());
 				try {
 					Message mess = (Message)ois.readObject();
-					String info = mess.getContent();
+					String info = mess.getFrom()+":"+mess.getContent();
 					this.jta.append(info);
 				} catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block
@@ -68,5 +72,5 @@ public class ChatFrame extends JFrame implements ActionListener,Runnable{
 				e.printStackTrace();
 			}
 		}
-	}
+	}*/
 }

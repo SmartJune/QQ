@@ -40,9 +40,12 @@ public class ServerFrame extends JFrame implements ActionListener{
 			t.start();
 		}else if(arg0.getSource() == jb2){
 			try {
-				q.connected = false;
+				q.started = false;
+				q.oos.close();
+				q.ois.close();
 				q.s.close();
 				q.ss.close();
+				t.destroy();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

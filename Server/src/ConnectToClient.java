@@ -17,9 +17,9 @@ public class ConnectToClient implements Runnable{
 				ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
 				try {
 					Message mess = (Message) ois.readObject();
-					System.out.println(mess.getContent());
+			//		System.out.println(mess.getContent());
 					
-					ConnectToClient ctc = SocketThreadManager.getClientSocketThread(mess.getFrom());
+					ConnectToClient ctc = SocketThreadManager.getClientSocketThread(mess.getTo());
 					ObjectOutputStream oos = new ObjectOutputStream(ctc.s.getOutputStream());
 					oos.writeObject(mess);
 					
