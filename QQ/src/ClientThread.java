@@ -21,6 +21,8 @@ public class ClientThread extends Thread{
 			try {
 				Message mess = (Message)ois.readObject();
 				System.out.println(mess.getFrom()+"to"+mess.getTo()+"说："+mess.getContent());
+				ChatFrame cf = ChatFrameManager.getChatFrame(mess.getFrom()+" "+mess.getTo());
+				cf.showMessage(mess);
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

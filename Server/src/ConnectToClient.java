@@ -1,7 +1,7 @@
 import java.net.*;
 import java.io.*;
 
-public class ConnectToClient implements Runnable{
+public class ConnectToClient extends Thread{
 	
 	Socket s;
 	
@@ -18,8 +18,8 @@ public class ConnectToClient implements Runnable{
 				try {
 					Message mess = (Message) ois.readObject();
 			//		System.out.println(mess.getContent());
-					
-					ConnectToClient ctc = SocketThreadManager.getClientSocketThread(mess.getTo());
+			//here?		
+					ConnectToClient ctc = SocketThreadManager.getClientSocketThread(mess.getFrom());
 					ObjectOutputStream oos = new ObjectOutputStream(ctc.s.getOutputStream());
 					oos.writeObject(mess);
 					

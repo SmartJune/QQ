@@ -23,8 +23,11 @@ public class ConnectToServer {
 					//if succeed , we will not limited by only one socket provided
 					ClientThread ct = new ClientThread(s);
 					ct.start();
-					User u = (User) o;
-					ClientThreadManager.addClientThread(u.getUserId(),ct);  //ms or o?
+		//			User u = (User) o;
+					ClientThreadManager.addClientThread(((User)o).getUserId(),ct);  //ms or o?
+				}
+				else{
+					s.close();
 				}
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block

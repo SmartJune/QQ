@@ -1,7 +1,7 @@
 import java.net.*;
 import java.io.*;
 
-public class QqServer implements Runnable{
+public class QqServer{
 	ServerSocket ss;
 	Socket s;
 	Message m = new Message();
@@ -10,7 +10,7 @@ public class QqServer implements Runnable{
 	User u;
 	boolean started = false;
 	
-	public void startServer() {
+	public QqServer() {
 		
 		try {
 			ss = new ServerSocket(9999);
@@ -30,27 +30,43 @@ public class QqServer implements Runnable{
 						m.setMessageType("1");
 				//		System.out.println("没错啊就是1");
 						oos.writeObject(m);
+						
+						ConnectToClient ctc = new ConnectToClient(s);
+						SocketThreadManager.addClientSocketThread(u.getUserId(),ctc);;
+						ctc.start();
+						
 					}else if(u.getUserId().equals("2")&& u.getPassword().equals("b")){
 						m.setMessageType("1");
 				//		System.out.println("没错啊就是1");
 						oos.writeObject(m);
+						
+						ConnectToClient ctc = new ConnectToClient(s);
+						SocketThreadManager.addClientSocketThread(u.getUserId(),ctc);;
+						ctc.start();
+						
 					}else if(u.getUserId().equals("3")&& u.getPassword().equals("c")){
 						m.setMessageType("1");
 				//		System.out.println("没错啊就是1");
 						oos.writeObject(m);
+						
+						ConnectToClient ctc = new ConnectToClient(s);
+						SocketThreadManager.addClientSocketThread(u.getUserId(),ctc);;
+						ctc.start();
+						
 					}else{
 						m.setMessageType("2");
 						oos.writeObject(m);
 						s.close();
 					}		
 					
-					if(m.getMessageType().equals("1")){
+			/*		if(m.getMessageType().equals("1")){
 						ConnectToClient ctc = new ConnectToClient(s);
 						SocketThreadManager.addClientSocketThread(u.getUserId(),ctc);;
-						
-						Thread t = new Thread(ctc);
-						t.start();
-					}
+						ctc.start();
+						*/
+		//				Thread t = new Thread(ctc);
+		//				t.start();
+		//			}
 					
 				} catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block
@@ -75,9 +91,10 @@ public class QqServer implements Runnable{
 		System.out.println("server closed");
 	}
 
-	@Override
+/*	@Override
 	public void run() {
 		// TODO Auto-generated method stub
 		startServer();
 	}
+	*/
 }

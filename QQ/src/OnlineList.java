@@ -68,7 +68,9 @@ public class OnlineList extends JFrame implements ActionListener,MouseListener{
 		this.setLayout(card);
 		this.add(mainPanel,"1");
 		this.add(mainPanel2,"2");
+		
 		this.userId = userID;
+		
 		this.setTitle(userID);
 		this.setSize(300,600);
 		this.setVisible(true);
@@ -92,8 +94,9 @@ public class OnlineList extends JFrame implements ActionListener,MouseListener{
 		if(arg0.getClickCount()==2){
 			//get his id
 			String friendId = ((JLabel)arg0.getSource()).getText();
-			String ownerId;
+	//		String ownerId;
 			ChatFrame cf = new ChatFrame(friendId,userId);
+			ChatFrameManager.addChatFrame(userId+" "+friendId, cf);
 	/*		Thread t = new Thread(cf);
 			t.start();  */
 			}

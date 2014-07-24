@@ -32,6 +32,12 @@ public class ChatFrame extends JFrame implements ActionListener{
 		this.setVisible(true);
 		
 	}
+	public void showMessage(Message mess){
+		String info = mess.getFrom()+"对"+mess.getTo()+"说："+mess.getContent()+"\n";
+		this.jta.append(info);
+		
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -39,14 +45,15 @@ public class ChatFrame extends JFrame implements ActionListener{
 			ownMess = new Message();
 			ownMess.setContent(jtf.getText().trim());
 			ownMess.setFrom(owner);
-			ownMess.setTo(friend);
+			ownMess.setTo(friend);			
+			//no problem
 			try {
 				ObjectOutputStream oos = new ObjectOutputStream(ClientThreadManager.
 						getClientThread(owner).getSocket().getOutputStream());
 				oos.writeObject(ownMess);
 				
-				String infoma = ownMess.getFrom()+":"+ownMess.getContent();
-				this.jta.append(infoma);
+			//	String infoma = ownMess.getFrom()+":"+ownMess.getContent();
+			//	this.jta.append(infoma);
 				
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block

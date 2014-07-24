@@ -35,21 +35,21 @@ public class ServerFrame extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 		if(arg0.getSource() == jb1){
-			q = new QqServer();
-			t = new Thread(q);
-			t.start();
-		}else if(arg0.getSource() == jb2){
-			try {
+			new QqServer();
+			
+		}
+		else if(arg0.getSource() == jb2){
+		/*	try {
 				q.started = false;
 				q.oos.close();
 				q.ois.close();
 				q.s.close();
 				q.ss.close();
-				t.destroy();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			*/
 		}
 	}
 	
