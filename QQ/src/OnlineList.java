@@ -25,9 +25,9 @@ public class OnlineList extends JFrame implements ActionListener,MouseListener{
 		listPanel = new JPanel(new GridLayout(userNumber,1,4,4));	
 		JLabel[] jlbs = new JLabel[userNumber];
 		for(int i = 0;i<jlbs.length;i++){
-			jlbs[i] = new JLabel(i+1+"",JLabel.LEFT);
-			Icon icon = new ImageIcon("home/workspace/qq/src/onLine.jpg");
-			jlbs[i].setIcon(icon);
+			jlbs[i] = new JLabel(i+1+"",new ImageIcon("icon/onLine.jpg"),JLabel.LEFT);
+	//		Icon icon = new ImageIcon("home/workspace/qq/src/onLine.jpg");
+	//		jlbs[i].setIcon(icon);
 			jlbs[i].addMouseListener(this);
 			listPanel.add(jlbs[i]);
 			if(jlbs[i].getText().equals(userID)){
@@ -53,9 +53,9 @@ public class OnlineList extends JFrame implements ActionListener,MouseListener{
 		listPanel2 = new JPanel(new GridLayout(strangerNumber,1,4,4));	
 		JLabel[] jlbs2 = new JLabel[strangerNumber];
 		for(int i = 0;i<jlbs2.length;i++){
-			jlbs2[i] = new JLabel(userNumber+i+1+"",JLabel.LEFT);
-			Icon icon = new ImageIcon("home/workspace/qq/src/onLine.jpg");
-			jlbs2[i].setIcon(icon);
+			jlbs2[i] = new JLabel(userNumber+i+1+"",new ImageIcon("icon/onLine.jpg"),JLabel.LEFT);
+		//	Icon icon = new ImageIcon("home/workspace/qq/src/onLine.jpg");
+		//	jlbs2[i].setIcon(icon);
 			jlbs2[i].addMouseListener(this);
 			listPanel2.add(jlbs2[i]);
 		}
