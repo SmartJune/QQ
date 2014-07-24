@@ -41,7 +41,8 @@ public class ChatFrame extends JFrame implements ActionListener{
 			ownMess.setFrom(owner);
 			ownMess.setTo(friend);
 			try {
-				ObjectOutputStream oos = new ObjectOutputStream(ClientThreadManager.getClientThread(owner).getSocket().getOutputStream());
+				ObjectOutputStream oos = new ObjectOutputStream(ClientThreadManager.
+						getClientThread(owner).getSocket().getOutputStream());
 				oos.writeObject(ownMess);
 				
 				String infoma = ownMess.getFrom()+":"+ownMess.getContent();

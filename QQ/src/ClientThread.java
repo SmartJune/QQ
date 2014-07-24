@@ -10,6 +10,7 @@ public class ClientThread extends Thread{
 	}
 	
 	public Socket getSocket(){
+		
 		return s;
 	}
 	
@@ -19,6 +20,7 @@ public class ClientThread extends Thread{
 			ois = new ObjectInputStream(s.getInputStream());
 			try {
 				Message mess = (Message)ois.readObject();
+				System.out.println(mess.getFrom()+"to"+mess.getTo()+"说："+mess.getContent());
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

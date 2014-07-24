@@ -8,7 +8,7 @@ public class ConnectToServer {
 		
 		boolean b = false;
 		try {
-			s = new Socket("192.168.43.27",9999);
+			s = new Socket("192.168.1.103",9999);
 			ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
 			oos.writeObject(o);
 			
@@ -23,7 +23,8 @@ public class ConnectToServer {
 					//if succeed , we will not limited by only one socket provided
 					ClientThread ct = new ClientThread(s);
 					ct.start();
-					ClientThreadManager.addClientThread(ms.getFrom(),ct);  //ms or o?
+					User u = (User) o;
+					ClientThreadManager.addClientThread(u.getUserId(),ct);  //ms or o?
 				}
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
