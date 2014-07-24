@@ -44,8 +44,9 @@ public class ChatFrame extends JFrame implements ActionListener{
 		if(e.getSource() == jb){
 			ownMess = new Message();
 			ownMess.setContent(jtf.getText().trim());
-			ownMess.setFrom(owner);
-			ownMess.setTo(friend);			
+			// here ,change identify to send message properly,not the right way
+			ownMess.setTo(owner);
+			ownMess.setFrom(friend);			
 			//no problem
 			try {
 				ObjectOutputStream oos = new ObjectOutputStream(ClientThreadManager.

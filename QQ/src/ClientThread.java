@@ -15,21 +15,23 @@ public class ClientThread extends Thread{
 	}
 	
 	public void run(){
-		ObjectInputStream ois;
-		try {
-			ois = new ObjectInputStream(s.getInputStream());
+		while(true){
+			ObjectInputStream ois;
 			try {
-				Message mess = (Message)ois.readObject();
-				System.out.println(mess.getFrom()+"to"+mess.getTo()+"说："+mess.getContent());
-				ChatFrame cf = ChatFrameManager.getChatFrame(mess.getFrom()+" "+mess.getTo());
-				cf.showMessage(mess);
-			} catch (ClassNotFoundException e) {
+				ois = new ObjectInputStream(s.getInputStream());
+				try {
+					Message mess = (Message)ois.readObject();
+					System.out.println(mess.getFrom()+"to"+mess.getTo()+"说："+mess.getContent());
+					ChatFrame cf = ChatFrameManager.getChatFrame(mess.getFrom()+" "+mess.getTo());
+					cf.showMessage(mess);
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		
 		
