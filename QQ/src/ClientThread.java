@@ -29,6 +29,8 @@ public class ClientThread extends Thread{
 						cf.showMessage(mess);
 					}else if(mess.getMessageType().equals(MessageType.returnList)){
 						//try to return a string with many people online
+						System.out.println(mess.getTo()+"get his friend list");
+						System.out.println("内容是："+mess.getContent());
 						String list = mess.getContent();
 						String guys[] = list.split(" ");
 						

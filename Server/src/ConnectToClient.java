@@ -18,11 +18,14 @@ public class ConnectToClient extends Thread{
 				try {
 					Message mess = (Message) ois.readObject();
 			//		System.out.println(mess.getContent());
+					System.out.println(mess.getFrom()+"to"+mess.getTo()+":"+mess.getContent());
+					
 					if(mess.getMessageType().equals(MessageType.chatMessage)){
 						ConnectToClient ctc = SocketThreadManager.getClientSocketThread(mess.getFrom());
 						ObjectOutputStream oos = new ObjectOutputStream(ctc.s.getOutputStream());
 						oos.writeObject(mess);
 					}else if(mess.getMessageType().equals(MessageType.getOnlineList)){
+						System.out.println(mess.getFrom()+"want to get online list");
 						String list = SocketThreadManager.getOnlineList();
 						Message m = new Message();
 						m.setMessageType(MessageType.returnList);

@@ -16,7 +16,7 @@ public class SocketThreadManager {
 		Iterator it = hm.keySet().iterator();
 		String list = "";
 		while(it.hasNext()){
-			Object o = it.next();
+		//	Object o = it.next();
 		//	list = list + ((User)o).getUserId() + " ";
 			list = list + it.next().toString() + " ";
 			System.out.println("Online list ： " + list);

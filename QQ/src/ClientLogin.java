@@ -78,6 +78,9 @@ public class ClientLogin extends JFrame implements ActionListener{
 				//online friend list request
 				try {
 					System.out.print("检测通过");
+					OnlineList ol = new OnlineList(u.getUserId());
+					OnlineListManager.addOnlineList(u.getUserId(), ol);
+					
 					ObjectOutputStream oos =  new ObjectOutputStream(ClientThreadManager
 							.getClientThread(u.getUserId()).getSocket().getOutputStream());
 					
@@ -88,10 +91,11 @@ public class ClientLogin extends JFrame implements ActionListener{
 					oos.writeObject(mess);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
+					System.out.println("异常在这里吗");
 					e.printStackTrace();
 				}
 				
-				new OnlineList(u.getUserId());
+			
 				this.dispose();	
 			}
 			else{

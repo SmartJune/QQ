@@ -148,6 +148,7 @@ public class OnlineList extends JFrame implements ActionListener,MouseListener{
 	public void updateList(Message mess){
 		String list[] = mess.getContent().split(" ");
 		for(int i = 0;i<list.length;i++){
+			System.out.println(list[i]);
 			jlbs[Integer.parseInt(list[i])-1].setEnabled(true);
 		}
 	}
