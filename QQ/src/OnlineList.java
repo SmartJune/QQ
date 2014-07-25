@@ -18,21 +18,25 @@ public class OnlineList extends JFrame implements ActionListener,MouseListener{
 
 	String userId;
 	
+	JLabel[] jlbs;
+	JLabel[] jlbs2;
+	
 	public OnlineList(String userID){
 		//friend list
 		mainPanel = new JPanel(new BorderLayout());	
 		int userNumber = 30;
 		listPanel = new JPanel(new GridLayout(userNumber,1,4,4));	
-		JLabel[] jlbs = new JLabel[userNumber];
+		jlbs = new JLabel[userNumber];
 		for(int i = 0;i<jlbs.length;i++){
 			jlbs[i] = new JLabel(i+1+"",new ImageIcon("icon/onLine.jpg"),JLabel.LEFT);
 	//		Icon icon = new ImageIcon("home/workspace/qq/src/onLine.jpg");
 	//		jlbs[i].setIcon(icon);
 			jlbs[i].addMouseListener(this);
-			jlbs[i].setForeground(Color.BLACK);
+			jlbs[i].setEnabled(false);
+	//		jlbs[i].setForeground(Color.BLACK);
 			listPanel.add(jlbs[i]);
 			if(jlbs[i].getText().equals(userID)){
-				jlbs[i].setForeground(Color.red);
+				jlbs[i].setEnabled(true);
 			}
 		}
 		jsp = new JScrollPane(listPanel);
@@ -52,12 +56,16 @@ public class OnlineList extends JFrame implements ActionListener,MouseListener{
 		mainPanel2 = new JPanel(new BorderLayout());	
 		int strangerNumber = 30;
 		listPanel2 = new JPanel(new GridLayout(strangerNumber,1,4,4));	
-		JLabel[] jlbs2 = new JLabel[strangerNumber];
+		jlbs2 = new JLabel[strangerNumber];
 		for(int i = 0;i<jlbs2.length;i++){
 			jlbs2[i] = new JLabel(userNumber+i+1+"",new ImageIcon("icon/onLine.jpg"),JLabel.LEFT);
 		//	Icon icon = new ImageIcon("home/workspace/qq/src/onLine.jpg");
 		//	jlbs2[i].setIcon(icon);
-			jlbs2[i].setForeground(Color.BLACK);
+		//j lbs2[i].setForeground(Color.BLACK);
+			jlbs2[i].setEnabled(false);
+			if(jlbs2[i].getText().equals(userID)){
+				jlbs2[i].setEnabled(true);
+			}
 			jlbs2[i].addMouseListener(this);
 			listPanel2.add(jlbs2[i]);
 		}
@@ -136,4 +144,12 @@ public class OnlineList extends JFrame implements ActionListener,MouseListener{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public void updateList(Message mess){
+		String list[] = mess.getContent().split(" ");
+		for(int i = 0;i<list.length;i++){
+			jlbs[Integer.parseInt(list[i])-1].setEnabled(true);
+		}
+	}
+	
 }

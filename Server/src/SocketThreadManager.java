@@ -10,4 +10,16 @@ public class SocketThreadManager {
 	public static ConnectToClient getClientSocketThread(String userId){
 		return (ConnectToClient)hm.get(userId);
 	}
+	public static String getOnlineList(){
+		
+//get online list message from hashmap
+		Iterator it = hm.keySet().iterator();
+		String list = "";
+		while(it.hasNext()){
+			Object o = it.next();
+			list = list + ((User)o).getUserId() + " ";
+			System.out.println("Online list ： ");
+		}
+		return "a";
+	}
 }

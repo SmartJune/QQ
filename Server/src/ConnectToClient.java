@@ -18,10 +18,23 @@ public class ConnectToClient extends Thread{
 				try {
 					Message mess = (Message) ois.readObject();
 			//		System.out.println(mess.getContent());
+					if(mess.getMessageType().equals(MessageType.chatMessage)){
+						ConnectToClient ctc = SocketThreadManager.getClientSocketThread(mess.getFrom());
+						ObjectOutputStream oos = new ObjectOutputStream(ctc.s.getOutputStream());
+						oos.writeObject(mess);
+					}else if(mess.getMessageType().equals(MessageType.getOnlineList)){
+						String list = SocketThreadManager.getOnlineList();
+						Message m = new Message();
+						m.setMessageType(MessageType.returnList);
+						m.setContent(list);
+						m.setTo(mess.getFrom());
+						ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
+						oos.writeObject(m);
+					}
+					
+					
 			//here?		
-					ConnectToClient ctc = SocketThreadManager.getClientSocketThread(mess.getFrom());
-					ObjectOutputStream oos = new ObjectOutputStream(ctc.s.getOutputStream());
-					oos.writeObject(mess);
+					
 					
 				} catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block

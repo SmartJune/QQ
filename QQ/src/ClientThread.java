@@ -34,6 +34,7 @@ public class ClientThread extends Thread{
 						
 						OnlineList ol = OnlineListManager.getOnlineList(mess.getTo());
 ////////////////////change the list at here
+						ol.updateList(mess);
 						
 					}
 					
