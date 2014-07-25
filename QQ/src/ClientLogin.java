@@ -85,9 +85,11 @@ public class ClientLogin extends JFrame implements ActionListener{
 							.getClientThread(u.getUserId()).getSocket().getOutputStream());
 					
 					Message mess = new Message();
+					System.out.println("message刚创建的内容是："+mess.getContent());
 					mess.setMessageType(MessageType.getOnlineList);
 					mess.setFrom(u.getUserId());
 					mess.setTo(u.getPassword());
+					System.out.println("message发送前的内容是："+mess.getContent());
 					oos.writeObject(mess);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block

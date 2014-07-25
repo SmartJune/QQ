@@ -23,7 +23,7 @@ public class ClientThread extends Thread{
 				ois = new ObjectInputStream(s.getInputStream());
 				try {
 					Message mess = (Message)ois.readObject();
-					System.out.println(mess.getFrom()+"to"+mess.getTo()+"说："+mess.getContent());
+					System.out.println(mess.getFrom()+"对"+mess.getTo()+"说："+mess.getContent());
 					if(mess.getMessageType().equals(MessageType.chatMessage)){
 						ChatFrame cf = ChatFrameManager.getChatFrame(mess.getFrom()+" "+mess.getTo());
 						cf.showMessage(mess);

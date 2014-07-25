@@ -21,6 +21,6 @@ public class SocketThreadManager {
 			list = list + it.next().toString() + " ";
 			System.out.println("Online list ： " + list);
 		}
-		return "a";
+		return list;
 	}
 }
