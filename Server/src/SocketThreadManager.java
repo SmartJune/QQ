@@ -17,8 +17,9 @@ public class SocketThreadManager {
 		String list = "";
 		while(it.hasNext()){
 			Object o = it.next();
-			list = list + ((User)o).getUserId() + " ";
-			System.out.println("Online list ： ");
+		//	list = list + ((User)o).getUserId() + " ";
+			list = list + it.next().toString() + " ";
+			System.out.println("Online list ： " + list);
 		}
 		return "a";
 	}

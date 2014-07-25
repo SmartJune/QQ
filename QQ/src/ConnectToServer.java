@@ -5,10 +5,11 @@ import java.net.*;
 public class ConnectToServer {
 	public Socket s;
 	public boolean sendLoginInfoToServer(Object o){
-		
+		System.out.println("进入检测函数");
 		boolean b = false;
 		try {
-			s = new Socket("192.168.1.103",9999);
+			s = new Socket("192.168.1.104",9999);
+			System.out.println("连接至服务器");
 			ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
 			oos.writeObject(o);
 			

@@ -68,14 +68,16 @@ public class ClientLogin extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 		if (arg0.getSource() == login){
+			System.out.println("按到键了");
 			LoginCheck lc = new LoginCheck();
 			User u = new User();
 			u.setUserId(numb.getText().trim());
 			u.setPassword(new String(pswd.getPassword()));
-			
+			System.out.println("开始检测");
 			if(lc.checkUser(u)){
 				//online friend list request
 				try {
+					System.out.print("检测通过");
 					ObjectOutputStream oos =  new ObjectOutputStream(ClientThreadManager
 							.getClientThread(u.getUserId()).getSocket().getOutputStream());
 					
