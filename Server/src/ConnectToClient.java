@@ -1,5 +1,6 @@
 import java.net.*;
 import java.io.*;
+import java.util.*;
 
 public class ConnectToClient extends Thread{
 	
@@ -7,6 +8,28 @@ public class ConnectToClient extends Thread{
 	
 	public ConnectToClient(Socket s){
 		this.s = s;
+	}
+	
+	public void IAmComing(String myself){
+		HashMap hm = SocketThreadManager.hm;
+		Iterator it = hm.keySet().iterator();
+		while(it.hasNext()){
+			String onLineGuys = it.next().toString();
+			try {
+				ObjectOutputStream oos = new ObjectOutputStream(SocketThreadManager.
+						getClientSocketThread(onLineGuys).s.getOutputStream());
+				Message mess = new Message();
+				mess.setContent(myself);
+				mess.setMessageType(MessageType.returnList);
+				mess.setTo(onLineGuys);
+				mess.setFrom(myself);
+				oos.writeObject(mess);
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	@Override

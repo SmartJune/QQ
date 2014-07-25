@@ -34,6 +34,7 @@ public class QqServer{
 						ConnectToClient ctc = new ConnectToClient(s);
 						SocketThreadManager.addClientSocketThread(u.getUserId(),ctc);;
 						ctc.start();
+						ctc.IAmComing(u.getUserId());
 						
 					}else if(u.getUserId().equals("2")&& u.getPassword().equals("b")){
 						m.setMessageType("1");
@@ -43,6 +44,7 @@ public class QqServer{
 						ConnectToClient ctc = new ConnectToClient(s);
 						SocketThreadManager.addClientSocketThread(u.getUserId(),ctc);;
 						ctc.start();
+						ctc.IAmComing(u.getUserId());
 						
 					}else if(u.getUserId().equals("3")&& u.getPassword().equals("c")){
 						m.setMessageType("1");
@@ -52,6 +54,7 @@ public class QqServer{
 						ConnectToClient ctc = new ConnectToClient(s);
 						SocketThreadManager.addClientSocketThread(u.getUserId(),ctc);;
 						ctc.start();
+						ctc.IAmComing(u.getUserId());
 						
 					}else{
 						m.setMessageType("2");
