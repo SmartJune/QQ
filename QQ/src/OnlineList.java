@@ -29,6 +29,7 @@ public class OnlineList extends JFrame implements ActionListener,MouseListener{
 	//		Icon icon = new ImageIcon("home/workspace/qq/src/onLine.jpg");
 	//		jlbs[i].setIcon(icon);
 			jlbs[i].addMouseListener(this);
+			jlbs[i].setForeground(Color.BLACK);
 			listPanel.add(jlbs[i]);
 			if(jlbs[i].getText().equals(userID)){
 				jlbs[i].setForeground(Color.red);
@@ -56,6 +57,7 @@ public class OnlineList extends JFrame implements ActionListener,MouseListener{
 			jlbs2[i] = new JLabel(userNumber+i+1+"",new ImageIcon("icon/onLine.jpg"),JLabel.LEFT);
 		//	Icon icon = new ImageIcon("home/workspace/qq/src/onLine.jpg");
 		//	jlbs2[i].setIcon(icon);
+			jlbs2[i].setForeground(Color.BLACK);
 			jlbs2[i].addMouseListener(this);
 			listPanel2.add(jlbs2[i]);
 		}
